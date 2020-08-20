@@ -1,0 +1,36 @@
+<form [formGroup]="form">
+  <div class="form-row">
+    <div class="col-md-12 mb-3">
+      <label for="descricao">Descrição</label>
+      <input type="text" class="form-control" formControlName="description" id="descricao"
+         [ngClass]="{'is-invalid': isValid(form.get('description'))}">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-12 col-md-3 col-xl-3 mb-3">
+      <label for="tipoTransacao">Tipo de Transação</label>
+      <input type="text" class="form-control" formControlName="typeTransaction" id="tipoTransacao"
+      [ngClass]="{'is-invalid': isValid(form.get('typeTransaction'))}">
+    </div>
+    <div class="col-12 col-md-3 col-xl-3 mb-3">
+      <label for="dataHora">Data/Hora</label>
+      <input type="datetime-local" class="form-control" formControlName="dateTrasaction" id="dataHora"
+      [ngClass]="{'is-invalid': isValid(form.get('dateTrasaction'))}">
+    </div>
+    <div class="col-12 col-md-3 col-xl-3 mb-3">
+      <label for="valor">Valor</label>
+      <input type="text" class="form-control" formControlName="amount" id="valor" currencyMask [options]="{ prefix: 'R$  ', thousands: '.', decimal: ',' }"
+      [ngClass]="{'is-invalid': isValid(form.get('amount'))}">
+    </div>
+  </div>
+  <hr>
+  <div class="form-row justify-content-end pb-5">
+    <div class="col-6 col-md-2 col-xl-2">
+      <button id="btnSalvar" type="submit" (click)="save()" class="btn btn-dark btn-block"
+        [disabled]="!form.valid">Salvar</button>
+    </div>
+    <div class="col-6 col-md-2 col-xl-2">
+      <button id="btnVoltar" type="submit" (click)="cancel()" class="btn btn-dark btn-block">Cancelar</button>
+    </div>
+  </div>
+</form>

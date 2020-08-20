@@ -1,0 +1,47 @@
+<form [formGroup]="form">
+  <div class="form-group row">
+    <label for="codigoBanco" class="col-sm-2 col-form-label"><b>Codigo do banco</b></label>
+    <div class="col-sm-10">
+      <input type="text" readonly class="form-control-plaintext" id="codigoBanco" formControlName="codeBank">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="contaBancaria" class="col-sm-2 col-form-label"><b>Conta bancária</b></label>
+    <div class="col-sm-10">
+      <input type="text" readonly class="form-control-plaintext" id="contaBancaria" formControlName="account">
+    </div>
+  </div>
+
+  <table class='table table-striped' aria-labelledby="tableLabel">
+    <thead>
+      <tr>
+        <th>Descrição</th>
+        <th>Tipo Transação</th>
+        <th>Data e hora</th>
+        <th>Valor</th>
+        <th class="text-center">Ação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of form.get('transactions').value  | paginate: { itemsPerPage: 5, currentPage: p }">
+        <td class="align-middle">{{item.description}}</td>
+        <td class="align-middle">{{item.typeTransaction}}</td>
+        <td class="align-middle">{{item.dateTrasaction | date: 'dd/MM/yyyy' }}</td>
+        <td class="align-middle">{{item.amount | currency:'BRL' }}</td>
+        <td class="text-nowrap text-center align-middle">
+          <button (click)="edit(item)" type="button" class="btn btn-outline-dark border-0">
+            <i class="fa fa-pencil mx-2"></i>
+          </button>
+          <button (click)="deleteItem(item)" type="button"  class="btn btn-outline-dark border-0">
+            <i class="fa fa-trash-o mx-2"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="row text-center">
+    <div class="col-md-12 text-center">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+  </div>
+</form>

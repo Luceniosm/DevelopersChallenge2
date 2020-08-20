@@ -1,0 +1,32 @@
+<form [formGroup]="form">
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="contaBancaria">Conta Bancária</label>
+      <select class="form-control" id="contaBancaria" formControlName="id">
+        <option value="" disabled>Escolha uma opção</option>
+        <option *ngFor="let dataBank of dataBanks" [ngValue]="dataBank.id">{{dataBank.account}}
+        </option>
+      </select>
+    </div>
+    <div class="col col-md-4 col-lg-2 my-4 pt-2">
+      <button type="submit" [disabled]="!form.valid" (click)="search()"
+        class="btn btn-dark btn-block">Buscar</button>
+    </div>
+  </div>
+</form>
+
+<app-listar-extrato
+*ngIf="showList"
+[form]="formDataBank"
+(editEmit)="edit($event)"
+(deleteEmit)="confirmDelete($event)"
+></app-listar-extrato>
+
+
+
+<app-editar-extrato
+*ngIf="editForm"
+(saveEmit)="update($event)"
+(cancelEmit)="cancel($event)"
+[selectedItem]="selectedItem"
+></app-editar-extrato>

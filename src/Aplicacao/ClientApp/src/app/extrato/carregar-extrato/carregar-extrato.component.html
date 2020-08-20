@@ -1,0 +1,59 @@
+<h1 id="tableLabel">Extratos Bancários</h1>
+<br>
+
+<div class="form-group row" *ngIf="showLodingFile">
+  <label for="files" class="col-12 col-sm-2 col-md-2 col-lg-2 pl-3 col-form-label">Arquivos</label>
+  <div class="col-12 col-md-4 col-xl-3 custom-file d-flex flex-column fix-mb-uploader">
+    <input type="file" id="files" class="d-none"  accept=".ofx"
+      (change)="onChange($event)" multiple />
+    <input type="text" class="form-control" onclick="$('#files').click();"
+      style="display: none;" readonly="readonly" />
+    <input type="button" class="btn btn-dark btn-block" onclick="$('#files').click();"
+      value="Selecionar arquivos" />
+  </div>
+  <div class="col-12 col-md-4 col-xl-3 custom-file d-flex flex-column fix-mb-uploader">
+    <input type="button" class="btn btn-dark btn-block" (click)="upload()"  [disabled]="!(uploadFiles.length > 0)"
+      value="Carregar" />
+  </div>
+</div>
+
+<div class="row" >
+  <ul class="list-inline" *ngFor="let item of uploadFiles">
+    <li class="list-inline-item">{{item.name}} &nbsp;</li>
+  </ul>
+</div>
+
+<div class="row" *ngIf="loading">
+  <div class="col-md-12 text-center">
+    <div class="spinner-border align-items-center" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</div>
+
+<div *ngFor="let item of extrats">
+  <app-listar-extrato
+    *ngIf="!editForm"
+    [form]="item"
+    (editEmit)="edit($event)"
+    (deleteEmit)="confirmRemove($event)"
+  ></app-listar-extrato>
+  <hr>
+</div>
+
+<div class="form-row justify-content-end pb-5" *ngIf="extrats.length > 0 && !editForm">
+  <div class="col-6 col-md-2 col-xl-2">
+    <button id="btnSave" type="submit" (click)="saveExtract()" class="btn btn-dark btn-block">Salvar</button>
+  </div>
+  <div class="col-6 col-md-2 col-xl-2">
+    <button id="btnClear" type="submit" (click)="clear()" class="btn btn-dark btn-block">Limpar</button>
+  </div>
+</div>
+
+<app-editar-extrato
+*ngIf="editForm"
+(saveEmit)="save($event)"
+(cancelEmit)="cancel($event)"
+[selectedItem]="selectedItem"
+></app-editar-extrato>
+

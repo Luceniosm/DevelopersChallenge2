@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
+    <PackageReference Include="ExtendedXmlSerializer" Version="3.2.5" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Aplicacao.Domain\Aplicacao.Domain.csproj" />
+    <ProjectReference Include="..\Aplicacao.DTO\Aplicacao.DTO.csproj" />
+    <ProjectReference Include="..\Aplicacao.Utility\Aplicacao.Utility.csproj" />
+  </ItemGroup>
+
+</Project>
