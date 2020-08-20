@@ -23,7 +23,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of form.get('transactions').value  | paginate: { itemsPerPage: 5, currentPage: p }">
+      <tr *ngFor="let item of returnedArray">
         <td class="align-middle">{{item.description}}</td>
         <td class="align-middle">{{item.typeTransaction}}</td>
         <td class="align-middle">{{item.dateTrasaction | date: 'dd/MM/yyyy' }}</td>
@@ -40,8 +40,14 @@
     </tbody>
   </table>
   <div class="row text-center">
-    <div class="col-md-12 text-center">
-      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    <div class="col-md-12 d-flex justify-content-center">
+      <pagination
+        [totalItems]="form.get('transactions').value.length"
+        [itemsPerPage]="5"
+        (pageChanged)="pageChanged($event)"
+        previousText="&lsaquo;"
+        nextText="&rsaquo;"
+        ></pagination>
     </div>
   </div>
 </form>
